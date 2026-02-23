@@ -7,20 +7,27 @@ class ImageCarousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        width: MediaQuery.of(context).size.height*0.8,
-            height: MediaQuery.of(context).size.width*0.8,
-            child: CarouselSlider(
-          options: CarouselOptions(autoPlay: true, viewportFraction: 1.0),
-          
-          items:[
-            Image.asset(mesImagesCarrousel[0],fit:BoxFit.cover),
-            Image.asset(mesImagesCarrousel[1],fit:BoxFit.cover),
-            Image.asset(mesImagesCarrousel[2],fit:BoxFit.cover),
-            Image.asset(mesImagesCarrousel[3],fit:BoxFit.cover),
-          ]
-            ),),
+    return CarouselSlider(
+      options: CarouselOptions(
+        autoPlay: true,
+        viewportFraction: 1.0,
+        height: 200,
+        enlargeCenterPage: false,
+      ),
+      items: mesImagesCarrousel.map((imagePath) {
+        return Builder(
+          builder: (BuildContext context) {
+            return Container(
+              width: MediaQuery.of(context).size.width,
+              margin: const EdgeInsets.symmetric(horizontal: 5.0),
+              child: Image.asset(
+                imagePath,
+                fit: BoxFit.cover,
+              ),
+            );
+          },
+        );
+      }).toList(),
     );
   }
 }
